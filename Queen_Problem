@@ -1,0 +1,42 @@
+
+import numpy as np  
+
+choice = [1,2,3,4,5,6,7,8]  # choosing from the list the next Queen's position
+    
+def is_diagonal(x1,y1,x2,y2):
+    gradient = (y2-y1)/(x2-x1)
+    if gradient == -1 or gradient == 1:
+        return(True)
+    else:
+        return(False)
+
+count = 0
+Sequence = []
+while len(Sequence) < 8:
+    if len(Sequence) == 0 or count >= 15:
+        Sequence = []
+        seed = np.random.randint(1,9)
+        Sequence.append(seed)   
+        count = 0
+    nex = 0    
+    while nex < 1:
+        count += 1
+        pop = np.random.choice([ele for ele in choice if ele not in (Sequence) ]) 
+#       print("pop candidate is ",pop, " and count is :", count)
+        for i in range(0,len(Sequence)):
+            if is_diagonal(i+1,Sequence[i],len(Sequence)+1,pop):
+                nex = 0
+                break
+            else: 
+                nex = 1
+        if count > 15:
+#           print("Count is Greater than 10 now ")
+            break        
+    if nex == 1 :
+        Sequence.append(pop)
+print("Sequence of the Queen for each row %n ", Sequence)        
+
+              
+
+
+
